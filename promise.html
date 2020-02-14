@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>サンプル</title>
+</head>
+<body >
+<form id="form1">
+<input type="button" value="ボタン1" onclick="clickBtn1()">
+<input type="text" name="cs1" value="custom1" maxlength="7">
+<input type="text" name="cs2" value="custom2" maxlength="7">
+</form>
+<script>
+function clickBtn1(){
+
+	const form1 = new FormData(document.getElementById("form1"));
+
+	fetch("http://httpbin.org/post",{
+			method:"POST",
+			body:form1
+		})
+		.then(function(response1) {
+			console.log("status=" + response1.status); //例 200
+			return response1.json(); // fetchメソッドはこの時点でbodyがないため
+		})
+		.then(function(data1) {
+			console.log(JSON.stringify(data1));
+		})
+		.catch(function(err1) {
+			console.log("err=" + err1);
+		});
+}
+</script>
+</body>
+</html>
